@@ -686,6 +686,8 @@ class CompileToPython:
             convertion = String.WRAPPER_PASSWD_CONVERTION(
                 ConvertFlag[prop.data_type].value, String.WRAPPER_LIST_GETTER(p_name)
             )
+        elif prop.data_type == "bool":
+            convertion = f"bool({String.WRAPPER_LIST_GETTER(p_name)})"
         elif prop_data := self.__type_in_struct_or_num(
             prop.data_type, self.structs, self.enums
         ):
@@ -722,7 +724,8 @@ class CompileToPython:
             func = String.WRAPPER_PASSWD_CONVERTION(
                 ConvertFlag[prop.data_type].value, String.WRAPPER_GETTER(p_name)
             )
-
+        elif prop.data_type == "bool":
+            func = f"bool({String.WRAPPER_GETTER(p_name)})"
         elif prop_data := self.__type_in_struct_or_num(
             prop.data_type, self.structs, self.enums
         ):
